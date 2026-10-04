@@ -118,7 +118,7 @@ describe('Real-World Functional Validation Suite', () => {
       startImmediately: false,
     });
 
-    const partPath = path.join(TEST_DIR, 'restart_test.txt.part');
+    const partPath = item.filepath + '.part';
     fs.writeFileSync(partPath, 'Partial data line 1\n');
 
     item.status = 'DOWNLOADING';
