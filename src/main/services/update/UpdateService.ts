@@ -35,20 +35,19 @@ export class UpdateService {
 
   // ============================================================
   // INITIALIZATION
-  // ============================================================
   initialize(getMainWindow: () => BrowserWindow | null): void {
     this.mainWindowRef = getMainWindow;
+    this.registerIpcHandlers();
 
-    // IMPORTANT: Only run real update checks in production packaged builds.
+    // IMPORTANT: Only run real background update checks in production packaged builds.
     // In development, log a notice and skip to prevent polluting GitHub releases.
     if (!app.isPackaged) {
-      LoggerService.info('UpdateService', 'Running in development mode — auto-update checks are disabled.');
+      LoggerService.info('UpdateService', 'Running in development mode — automated background update checks are disabled.');
       this.status.state = 'IDLE';
       return;
     }
 
     this.configureAutoUpdater();
-    this.registerIpcHandlers();
 
     // Check on startup (delayed 8 seconds to not delay app launch)
     setTimeout(() => {
@@ -197,7 +196,13 @@ export class UpdateService {
   /** Check for updates. silently=true suppresses error notifications for periodic checks. */
   async checkForUpdates(manual: boolean = false): Promise<UpdateCheckResult | null> {
     if (!app.isPackaged) {
-      LoggerService.info('UpdateService', 'Dev mode: skipping update check.');
+      LoggerService.info('UpdateService', 'Dev mode: skipping live network update check.');
+      if (manual) {
+        this.updateStatus({
+          state: 'UP_TO_DATE',
+          lastChecked: Date.now(),
+        });
+      }
       return null;
     }
     if (this.isChecking) {

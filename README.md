@@ -70,7 +70,7 @@ npm run electron:dev
 ### Production Build & Installer
 
 ```bash
-# Generate Windows NSIS Installer
+# Generate Windows NSIS Installer locally
 npm run dist
 ```
 
@@ -80,11 +80,46 @@ Output installer: `dist-installer/Vanya Downloader Setup 1.0.1.exe`
 
 ## Testing
 
-Run unit & integration test suite:
+Run unit & integration test suite (27 automated tests covering download engine, smart naming, queue, restart recovery, and auto-update logic):
 
 ```bash
 npm test
 ```
+
+---
+
+## Release Process & Auto-Update Pipeline
+
+Vanya Downloader uses a production-grade CI/CD and release pipeline powered by GitHub Actions and `electron-updater`:
+
+### Releasing a New Version
+
+1. **Verify your local code & test suite:**
+   ```bash
+   npm test
+   npx tsc --noEmit
+   ```
+2. **Execute the automated release script:**
+   - **Patch update** (bug fixes):
+     ```bash
+     npm run release:patch
+     ```
+   - **Minor update** (new features):
+     ```bash
+     npm run release:minor
+     ```
+   - **Major update** (breaking changes):
+     ```bash
+     npm run release:major
+     ```
+
+### What Happens Automatically:
+- Runs TypeScript checks & automated tests.
+- Bumps semantic version in `package.json`.
+- Appends release entry to `CHANGELOG.md`.
+- Creates and pushes Git commit and version tag (`vX.Y.Z`) to GitHub.
+- GitHub Actions triggers `.github/workflows/release.yml`, builds on Windows, packages the NSIS installer (`Vanya Downloader Setup X.Y.Z.exe`), generates `latest.yml`, and publishes the release on GitHub.
+- Installed Vanya Downloader clients detect the new release, allow users to download the update in the background with progress, and provide a single-click "Restart & Install" without losing user data or browser integration.
 
 ---
 

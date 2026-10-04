@@ -5,7 +5,7 @@
   "main": "dist-electron/main/main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prashant-kuntal/vanya-downloader.git"
+    "url": "https://github.com/prashantkuntal00-droid/vanya-downloader.git"
   },
   "scripts": {
     "dev": "vite",
@@ -68,7 +68,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "prashant-kuntal",
+        "owner": "prashantkuntal00-droid",
         "repo": "vanya-downloader",
         "releaseType": "release"
       }

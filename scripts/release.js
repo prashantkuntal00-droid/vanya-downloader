@@ -44,7 +44,7 @@ async function release() {
   try {
     runOutput('git remote get-url origin');
   } catch {
-    console.error('ERROR: No git remote "origin" configured. Run: git remote add origin https://github.com/prashant-kuntal/vanya-downloader.git');
+    console.error('ERROR: No git remote "origin" configured. Run: git remote add origin https://github.com/prashantkuntal00-droid/vanya-downloader.git');
     process.exit(1);
   }
 
@@ -117,7 +117,7 @@ async function release() {
 
   console.log(`\n✅ Release v${newVersion} successfully tagged and pushed!`);
   console.log(`   GitHub Actions will now build and publish the Windows installer.`);
-  console.log(`   Watch progress at: https://github.com/prashant-kuntal/vanya-downloader/actions`);
+  console.log(`   Watch progress at: https://github.com/prashantkuntal00-droid/vanya-downloader/actions`);
 }
 
 release().catch((err) => {
