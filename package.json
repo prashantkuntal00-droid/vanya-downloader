@@ -1,6 +1,6 @@
 {
   "name": "vanya-downloader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vanya Downloader — Free IDM-Style High-Performance Windows Download Manager",
   "main": "dist-electron/main/main.js",
   "repository": {
@@ -102,7 +102,9 @@
           ]
         }
       ],
-      "signingHashAlgorithms": ["sha256"]
+      "signingHashAlgorithms": [
+        "sha256"
+      ]
     },
     "nsis": {
       "oneClick": false,
