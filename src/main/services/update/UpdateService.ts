@@ -263,8 +263,9 @@ export class UpdateService {
     try {
       LoggerService.info('UpdateService', 'Installing update and restarting...');
       this.updateStatus({ state: 'INSTALLING' });
-      // isSilent=false so user sees the install, forceRunAfter=true so app restarts
-      autoUpdater.quitAndInstall(false, true);
+      // isSilent=true enables seamless background installation without showing the interactive NSIS wizard.
+      // isForceRunAfter=true ensures the new version launches automatically once the update completes.
+      autoUpdater.quitAndInstall(true, true);
       return true;
     } catch (err: any) {
       LoggerService.error('UpdateService', `quitAndInstall error: ${err?.message || err}`);
