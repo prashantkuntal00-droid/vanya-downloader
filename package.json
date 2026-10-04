@@ -1,0 +1,121 @@
+{
+  "name": "vanya-downloader",
+  "version": "1.0.1",
+  "description": "Vanya Downloader — Free IDM-Style High-Performance Windows Download Manager",
+  "main": "dist-electron/main/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prashant-kuntal/vanya-downloader.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build": "npm run build:electron && npm run build:renderer",
+    "preview": "vite preview",
+    "electron:dev": "npm run build:electron && electron .",
+    "fetch-engines": "node scripts/download-engines.js",
+    "test": "vitest run",
+    "dist": "npm run build && npm run fetch-engines && electron-builder --win",
+    "release:patch": "node scripts/release.js patch",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major"
+  },
+  "keywords": [
+    "download-manager",
+    "aria2",
+    "idm",
+    "windows",
+    "video-downloader",
+    "ffmpeg",
+    "yt-dlp",
+    "electron"
+  ],
+  "author": "Prashant Kuntal",
+  "license": "MIT",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "electron-updater": "^6.3.9",
+    "lucide-react": "^0.428.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2",
+    "ws": "^8.18.0",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.5.12",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "electron": "^31.4.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1",
+    "vitest": "^2.0.5"
+  },
+  "build": {
+    "appId": "com.vanya.downloader",
+    "productName": "Vanya Downloader",
+    "copyright": "Copyright © 2026 Prashant Kuntal",
+    "directories": {
+      "output": "dist-installer"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "prashant-kuntal",
+        "repo": "vanya-downloader",
+        "releaseType": "release"
+      }
+    ],
+    "files": [
+      "dist-electron/**/*",
+      "dist/**/*",
+      "engines/**/*",
+      "build/**/*",
+      "public/**/*",
+      "src/main/native-host/**/*",
+      "browser-extension/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "engines",
+        "to": "engines",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signingHashAlgorithms": ["sha256"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Vanya Downloader",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

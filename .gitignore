@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build Outputs & Packaging
+dist/
+dist-electron/
+dist-installer/
+release/
+out/
+build/*.exe
+build/*.zip
+build/*.blockmap
+
+# Download Engine Binaries (downloaded dynamically via `npm run fetch-engines`)
+engines/
+
+# Local Dev Data & Logs
+data/
+*.log
+logs/
+
+# Test Artifacts
+tests/temp_test_dir/
+coverage/
+
+# Environment, Secrets & Private Keys
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.cert
+*.crt
+
+# OS and Editor Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+.kilo/
+
+# Temporary Download Files
+*.part
+*.tmp

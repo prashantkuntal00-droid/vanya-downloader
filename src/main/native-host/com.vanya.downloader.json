@@ -1,0 +1,10 @@
+{
+  "name": "com.vanya.downloader",
+  "description": "Vanya Downloader Native Messaging Host",
+  "path": "vanya-native-host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://*",
+    "edge-extension://*"
+  ]
+}
