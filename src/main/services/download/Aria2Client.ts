@@ -245,6 +245,9 @@ export class Aria2Client extends EventEmitter {
   }
 
   public async setGlobalSpeedLimit(bytesPerSec: number): Promise<boolean> {
+    if (!this.isEngineActive()) {
+      return false;
+    }
     try {
       await this.callRpc('aria2.changeGlobalOption', [
         { 'max-overall-download-limit': String(bytesPerSec) },
